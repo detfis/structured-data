@@ -12,7 +12,7 @@
 
 (defn spiff-destructuring [v]
   (let [[x y z] v]
-  (+ x z)))
+    (+ x z)))
 
 (defn point [x y]
   [x y])
@@ -21,22 +21,31 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (Math/abs (- x1 x2))))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (Math/abs (- y1 y2))))
 
 (defn square? [rectangle]
-  :-)
+  (= (height rectangle) (width rectangle)))
 
 (defn area [rectangle]
-  :-)
+  (* (height rectangle) (width rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [
+        [p1 p2] point
+        [[x1 y1] [x2 y2]] rectangle
+        ]
+    (and (and (<= x1 p1) (>= x2 p1)) (and (<= y1 p2) (>= y2 p2)))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [
+        [i_point_1 i_point_2] inner
+        ]
+    (and (contains-point? outer i_point_1) (contains-point? outer i_point_2))))
 
 (defn title-length [book]
   :-)
