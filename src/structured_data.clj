@@ -109,13 +109,17 @@
       (str name))))
 
 (defn authors->string [authors]
-  :-)
+  (clojure.string/join ", " (map author->string authors)))
 
 (defn book->string [book]
-  :-)
+  (str (:title book), ", written by ", (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (cond 
+    (empty? books) "No books."
+    (= 1 (count books)) (str "1 book. ", (book->string (first books)), ".")
+    :else (str (count books), " books. ", (clojure.string/join ". " (map book->string books)))))
+    
 
 (defn books-by-author [author books]
   :-)
